@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Visual Studio or MSBuild property file to use the OpenSSL static libraries -->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="UserMacros">
+    <OPENSSL_LIBSUFFIX>_static.lib</OPENSSL_LIBSUFFIX>
+  </PropertyGroup>
+  <Import Project="$(OPENSSL_WINLIBS)\openssl-common.props"/>
+</Project>

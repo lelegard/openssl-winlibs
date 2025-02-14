@@ -1,1 +1,1 @@
-# Repackaging of OpenSSL libraries on Windows
+# Repackaging of OpenSSL Libraries for Windows

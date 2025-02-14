@@ -1,9 +1,11 @@
 tmp
+installers
 arm64
 x64
 x86
 win32
 win64
+bin
 .vs
 *.vcxproj.user
 .#*

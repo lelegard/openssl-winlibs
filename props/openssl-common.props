@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Visual Studio or MSBuild common property file to use the OpenSSL libraries -->
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Normalize platform name -->
+  <Choose>
+    <When Condition="'$(Platform)' == 'x86'">
+      <PropertyGroup Label="UserMacros">
+        <OPENSSL_ARCH>Win32</OPENSSL_ARCH>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Platform)' == 'x64'">
+      <PropertyGroup Label="UserMacros">
+        <OPENSSL_ARCH>Win64</OPENSSL_ARCH>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Platform)' == 'ARM64'">
+      <PropertyGroup Label="UserMacros">
+        <OPENSSL_ARCH>Arm64</OPENSSL_ARCH>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup Label="UserMacros">
+        <OPENSSL_ARCH>$(Platform)</OPENSSL_ARCH>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <!-- Root directory for architecture -->
+  <PropertyGroup Label="UserMacros">
+    <OPENSSL_ARCHDIR>$(OPENSSL_WINLIBS)\$(OPENSSL_ARCH)\</OPENSSL_ARCHDIR>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)' == 'Debug'">
+    <OPENSSL_LIBDIR>$(OPENSSL_ARCHDIR)MDd\</OPENSSL_LIBDIR>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" Condition="'$(Configuration)' != 'Debug'">
+    <OPENSSL_LIBDIR>$(OPENSSL_ARCHDIR)MD\</OPENSSL_LIBDIR>
+  </PropertyGroup>
+
+  <!-- Compilation and link options -->
+  <ItemDefinitionGroup Condition="Exists('$(OPENSSL_ARCHDIR)')">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(OPENSSL_ARCHDIR)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>libssl$(OPENSSL_LIBSUFFIX);libcrypto$(OPENSSL_LIBSUFFIX);ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OPENSSL_LIBDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+
+</Project>
