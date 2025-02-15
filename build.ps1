@@ -160,6 +160,7 @@ function Get-OpenSSL-Config()
 
 # Download and install all MSI packages.
 if (-not $NoInstall) {
+    Write-Output "Installing OpenSSL for all architectures ..."
     $packages = Get-OpenSSL-Config
     foreach ($Arch in $SSL.Keys) {
 
@@ -233,7 +234,9 @@ $VersionInfo = "$($VField[0]).$($VField[1]).$($VField[2]).$($VField[3])"
 $InstRoot = Get-Directory -Reset "$TmpDir\OpenSSL-WinLibs"
 Copy-Item "$($SSL.Win64.root)\license.txt" $InstRoot
 Copy-Item "$RootDir\props\*.props" $InstRoot
-Copy-Item -Recurse "$RootDir\samples" $InstRoot
+Copy-Item -Recurse "$RootDir\samples" $InstRoot -Exclude @(".vs", "bin", "*.user")
+Remove-Item -Path "$InstRoot\samples\.vs" -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item -Path "$InstRoot\samples\bin" -Recurse -Force -ErrorAction SilentlyContinue
 
 foreach ($Arch in $SSL.Keys) {
     $ArchDir = Get-Directory "$InstRoot\$Arch"

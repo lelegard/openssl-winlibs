@@ -6,5 +6,10 @@
   <PropertyGroup Label="UserMacros">
     <OPENSSL_LIBSUFFIX>_static.lib</OPENSSL_LIBSUFFIX>
   </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <Import Project="$(OPENSSL_WINLIBS)\openssl-common.props"/>
 </Project>

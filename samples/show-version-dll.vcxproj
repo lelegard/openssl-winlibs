@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{cfc399df-56af-4dce-ad31-80dfd1d09cf3}</ProjectGuid>
+    <RootNamespace>showversiondll</RootNamespace>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildProjectDirectory)\show-version.props" />
+
+  <ItemGroup>
+    <ClCompile Include="show-version.cpp" />
+  </ItemGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+
+  <Import Project="$(OPENSSL_WINLIBS)\openssl-dll.props" />
+
+</Project>

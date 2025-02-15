@@ -33,11 +33,16 @@
     <OPENSSL_ARCHDIR>$(OPENSSL_WINLIBS)\$(OPENSSL_ARCH)\</OPENSSL_ARCHDIR>
   </PropertyGroup>
   <PropertyGroup Label="UserMacros" Condition="'$(Configuration)' == 'Debug'">
-    <OPENSSL_LIBDIR>$(OPENSSL_ARCHDIR)MDd\</OPENSSL_LIBDIR>
+    <OPENSSL_LIBDIR>$(OPENSSL_ARCHDIR)lib\MDd\</OPENSSL_LIBDIR>
   </PropertyGroup>
   <PropertyGroup Label="UserMacros" Condition="'$(Configuration)' != 'Debug'">
-    <OPENSSL_LIBDIR>$(OPENSSL_ARCHDIR)MD\</OPENSSL_LIBDIR>
+    <OPENSSL_LIBDIR>$(OPENSSL_ARCHDIR)lib\MD\</OPENSSL_LIBDIR>
   </PropertyGroup>
+
+  <!-- List of DLL's -->
+  <ItemGroup>
+    <OPENSSL_DLLS Include="$(OPENSSL_ARCHDIR)\dll\*.dll"/>
+  </ItemGroup>
 
   <!-- Compilation and link options -->
   <ItemDefinitionGroup Condition="Exists('$(OPENSSL_ARCHDIR)')">
@@ -45,7 +50,7 @@
       <AdditionalIncludeDirectories>$(OPENSSL_ARCHDIR)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>libssl$(OPENSSL_LIBSUFFIX);libcrypto$(OPENSSL_LIBSUFFIX);ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libssl$(OPENSSL_LIBSUFFIX);libcrypto$(OPENSSL_LIBSUFFIX);%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(OPENSSL_LIBDIR);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

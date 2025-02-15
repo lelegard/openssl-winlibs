@@ -8,6 +8,6 @@
   </PropertyGroup>
   <Import Project="$(OPENSSL_WINLIBS)\openssl-common.props"/>
   <Target Name="AfterBuild">
-    <Copy SourceFiles="$(OPENSSL_ARCHDIR)\dll\*.dll" DestinationFolder="$(OutDir)" />
+    <Copy SourceFiles="@(OPENSSL_DLLS)" DestinationFolder="$(OutDir)" />
   </Target>
 </Project>
